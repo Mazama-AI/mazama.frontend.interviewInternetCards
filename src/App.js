@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
+import { getDataFromAPI } from './bin/get_all_items';
 import './App.css';
+import Navbar from './components/navbar';
+import CardBody from './components/cardbody';
 
 function App() {
+
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getDataFromAPI();
+      console.log(data);
+    }
+    getData();
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+      <CardBody>
+        <h2>Internet Offers</h2>
+        <p>Get the best internet offers here</p>
+
+      </CardBody>
     </div>
   );
 }
