@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import { getDataFromAPI } from './bin/get_all_items';
 import './App.css';
 import Navbar from './components/navbar';
