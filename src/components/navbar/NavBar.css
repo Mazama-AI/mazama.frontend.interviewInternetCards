@@ -35,3 +35,7 @@
     text-decoration: underline;
   }
   
+.selected-offer{
+  color: #fff;
+  margin: 0;
+}

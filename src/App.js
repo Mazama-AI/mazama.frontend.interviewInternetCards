@@ -1,27 +1,39 @@
-import React, {useEffect} from 'react';
-import { getDataFromAPI } from './bin/get_all_items';
+// Packages
+import React, {useEffect, useState} from 'react'
+// Styles
 import './App.css';
+// Components
 import Navbar from './components/navbar';
 import CardBody from './components/cardbody';
+import InternetCard from './components/internetcard';
+// Context
+import { StoreProvider } from './context/Store';
+// Functions
+import getCards from './bin/getCards';
 
 function App() {
 
+  const [cards, setCards] = useState([]);
+
   useEffect(() => {
-    const getData = async () => {
-      const data = await getDataFromAPI();
-      console.log(data);
-    }
-    getData();
+    getCards().then(res => {
+      setCards(res)
+    })
   }, [])
 
   return (
     <div className="App">
+      <StoreProvider>
       <Navbar />
-      <CardBody>
-        <h2>Internet Offers</h2>
-        <p>Get the best internet offers here</p>
-
-      </CardBody>
+      <div className='body-container'>
+        <CardBody>
+          {cards.map((card, index) => {
+            const item = card.item;
+            return <InternetCard index={index} item={item} />
+          })}
+        </CardBody>
+      </div>
+      </StoreProvider>
     </div>
   );
 }
